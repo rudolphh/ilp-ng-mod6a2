@@ -6,4 +6,5 @@ export interface User {
   city ?: string;
   phone ?: string;
   password ?: string;
+  confirmPassword ?: string;
 }

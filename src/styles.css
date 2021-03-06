@@ -7,15 +7,15 @@
   padding: 30px;
 }
 form {
-  width: 30vw;
+  width: 40vw;
 }
 
 .btn-group {
-  margin-top: 30px;
+  margin-top: 36px;
   display: flex;
   justify-content: center;
 }
 
-.validation-error {
-  color: red;
+.text-danger {
+  font-size: small;
 }
