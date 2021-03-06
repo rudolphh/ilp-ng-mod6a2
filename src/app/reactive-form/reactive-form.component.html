@@ -101,13 +101,13 @@
 
 <div *ngIf="submitted && registerForm.valid" class="container">
   <div>
-    <p>Name : {{ user.name }}</p>
-    <p>Email : {{ user.email }}</p>
-    <p>Address : {{ user.address }}</p>
-    <p>City : {{ user.city }}</p>
-    <p>Phone : {{ user.phone }}</p>
-    <p>Password : {{ user.password }}</p>
-    <p>Confirm Password : {{ registerForm.value.confirmPassword }}</p>
+    <p>Name : {{ name!.value }}</p>
+    <p>Email : {{ email!.value }}</p>
+    <p>Address : {{ address!.value }}</p>
+    <p>City : {{ city!.value }}</p>
+    <p>Phone : {{ phone!.value }}</p>
+    <p>Password : {{ password!.value }}</p>
+    <p>Confirm Password : {{ confirmPassword!.value }}</p>
   </div>
 
 </div>

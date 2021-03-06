@@ -1,6 +1,8 @@
+import { ConfirmPasswordValidator } from './../_helpers/confirmpassword.validator';
 import { User } from './user';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-reactive-form',
@@ -37,12 +39,12 @@ export class ReactiveFormComponent implements OnInit {
         Validators.minLength(6)
       ]],
       confirmPassword: [this.user.confirmPassword, Validators.required],
-    })
+    }, { validator : ConfirmPasswordValidator.MatchPassword });
 
     /* can also create instances manually
 
     this.registerForm = new FormGroup({
-      name: new FormControl(this.user.name, Validators.required), 
+      name: new FormControl(this.user.name, Validators.required),
       address: new FormControl(this.user.address),
       city: new FormControl(this.user.city),
       phone: new FormControl(this.user.phone),
