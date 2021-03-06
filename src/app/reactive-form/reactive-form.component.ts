@@ -41,22 +41,22 @@ export class ReactiveFormComponent implements OnInit {
       confirmPassword: [this.user.confirmPassword, Validators.required],
     }, { validator : ConfirmPasswordValidator.MatchPassword });
 
-    /* can also create instances manually
-
-    this.registerForm = new FormGroup({
-      name: new FormControl(this.user.name, Validators.required),
-      address: new FormControl(this.user.address),
-      city: new FormControl(this.user.city),
-      phone: new FormControl(this.user.phone),
-      password: new FormControl(this.user.password),
-      confirmPassword: new FormControl(),
-    });
-
-    */
   }
 
   onSubmit(){
     this.submitted = true;
+  }
+
+  isFieldValid(field: string) {
+    return !this.registerForm.get(field)!.valid && this.registerForm.get(field)!.touched;
+  }
+
+  displayFieldCss(field: string) {
+    return {
+      //'has-error': this.isFieldValid(field),
+      //'has-feedback': this.isFieldValid(field)
+      'is-invalid': this.registerForm.get(field)!.invalid && this.registerForm.get(field)!.touched
+    };
   }
 
   get name() { return this.registerForm.get('name'); }

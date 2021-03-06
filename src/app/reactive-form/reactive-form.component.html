@@ -5,7 +5,7 @@
     <div class="mb-3">
       <label for="userName" class="form-label">Full Name</label>
       <input type="text" formControlName="name" class="form-control" id="userName"
-        [class.is-invalid]="name!.invalid && name!.touched"
+        [ngClass]="displayFieldCss('name')"
         aria-describedby="nameHelp" required />
       <small id="nameHelp" class="form-text">First and last name</small>
       <span class="text-danger"
@@ -18,7 +18,7 @@
     <div class="mb-3">
       <label for="userEmail" class="form-label">Email Address</label>
       <input type="email" formControlName="email" class="form-control" id="userEmail"
-        [class.is-invalid]="email!.invalid && email!.touched"
+        [ngClass]="displayFieldCss('email')"
         name="email" aria-describedby="emailHelp" />
       <small id="emailHelp" class="form-text">example@site.com</small>
       <span class="text-danger"
@@ -35,7 +35,7 @@
     <div class="mb-3">
       <label for="userAddress" class="form-label">Address</label>
       <input type="text" formControlName="address" class="form-control" id="userAddress"
-        [class.is-invalid]="address!.invalid && address!.touched" name="address" />
+        [ngClass]="displayFieldCss('address')" name="address" />
       <span class="text-danger"
         *ngIf="(address!.touched || submitted) && address!.errors?.required" >
         Address is required
@@ -46,7 +46,7 @@
     <div class="mb-3">
       <label for="userCity" class="form-label">City</label>
       <input type="text" formControlName="city" class="form-control" id="userCity"
-        [class.is-invalid]="city!.invalid && city!.touched" name="city"  />
+        [ngClass]="displayFieldCss('city')"name="city"  />
       <span class="text-danger"
         *ngIf="(city!.touched || submitted) && city!.errors?.required" >
         City is required
@@ -57,7 +57,7 @@
     <div class="mb-3">
       <label for="userPhone" class="form-label">Phone Number</label>
       <input type="tel" formControlName="phone" class="form-control" id="userPhone"
-        [class.is-invalid]="phone!.invalid && phone!.touched" name="phone"
+        [ngClass]="displayFieldCss('phone')" name="phone"
         aria-describedby="phoneHelp" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
       <small id="phoneHelp" class="form-text" >Format : 123-456-7890</small>
       <span class="text-danger"
@@ -74,7 +74,7 @@
     <div class="mb-3">
       <label for="userPassword" class="form-label">Password</label>
       <input type="password" formControlName="password" class="form-control" id="userPassword"
-        [class.is-invalid]="password!.invalid && password!.touched" name="password"  />
+        [ngClass]="displayFieldCss('password')" name="password"  />
       <span class="text-danger"
         *ngIf="(password!.touched || submitted) && password!.errors?.required" >
         Password is required
@@ -85,7 +85,7 @@
     <div class="mb-3">
       <label for="confirmPassword" class="form-label">Confirm Password</label>
       <input type="password" formControlName="confirmPassword" class="form-control"
-        [class.is-invalid]="confirmPassword!.invalid && confirmPassword!.touched"
+        [ngClass]="displayFieldCss('confirmPassword')"
         id="confirmPassword" name="confirmPassword"  />
       <span class="text-danger"
         *ngIf="(confirmPassword!.touched || submitted) && confirmPassword!.errors?.ConfirmPassword" >
