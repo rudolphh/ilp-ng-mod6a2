@@ -1,7 +1,7 @@
 import { ConfirmPasswordValidator } from './../_helpers/confirmpassword.validator';
 import { User } from './user';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -11,10 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ReactiveFormComponent implements OnInit {
 
-  registerForm !: FormGroup;
-
-  user : User = {};
-
+  public registerForm !: FormGroup;
+  public user : User = {};
   public submitted : boolean = false;
 
   constructor(private fb : FormBuilder) { }
@@ -44,19 +42,46 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.submitted = true;
+    if (this.registerForm.valid) {
+      console.log('form submitted');
+      this.submitted = true;
+    } else {
+      // validate all form fields
+      this.validateAllFormFields(this.registerForm);
+    }
   }
 
-  isFieldValid(field: string) {
-    return !this.registerForm.get(field)!.valid && this.registerForm.get(field)!.touched;
+  isRequiredFieldValid(field: string) {
+    return this.registerForm.get(field)!.touched && this.registerForm.get(field)!.errors?.required;
+  }
+
+  isPatternFieldValid(field: string) {
+    return this.registerForm.get(field)!.touched && this.registerForm.get(field)!.errors?.pattern;
+  }
+
+  isMinLengthFieldValid(field: string) {
+    return this.registerForm.get(field)!.touched && this.registerForm.get(field)!.errors?.minlength;
+  }
+
+  isPasswordMatching(){
+    return this.confirmPassword!.touched && this.confirmPassword!.errors?.ConfirmPassword;
   }
 
   displayFieldCss(field: string) {
     return {
-      //'has-error': this.isFieldValid(field),
-      //'has-feedback': this.isFieldValid(field)
       'is-invalid': this.registerForm.get(field)!.invalid && this.registerForm.get(field)!.touched
     };
+  }
+
+  validateAllFormFields(formGroup: FormGroup) {         //{1}
+    Object.keys(formGroup.controls).forEach(field => {  //{2}
+      const control = formGroup.get(field);             //{3}
+      if (control instanceof FormControl) {             //{4}
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {        //{5}
+        this.validateAllFormFields(control);            //{6}
+      }
+    });
   }
 
   get name() { return this.registerForm.get('name'); }

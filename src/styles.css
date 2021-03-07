@@ -19,3 +19,10 @@ form {
 .text-danger {
   font-size: small;
 }
+
+.error-msg {
+  color: #a94442;
+}
+.fix-error-icon {
+  top: 27px;
+}
